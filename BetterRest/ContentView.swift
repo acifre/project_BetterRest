@@ -35,17 +35,23 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Text("When do you want to wake up?")
-                    .font(.headline)
-                DatePicker("Pick Date:", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
-                Text("Desired amount of sleep")
-                    .font(.headline)
-                Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
-                Text("Daily coffee intake")
-                    .font(.headline)
-                Stepper("\(coffeeAmount) \(coffeeAmount > 1 ? "cups" : "cup")", value: $coffeeAmount, in: 1...20)
-            
+                VStack {
+                    Text("When do you want to wake up?")
+                        .font(.headline)
+                    DatePicker("Pick Date:", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Desired amount of sleep")
+                        .font(.headline)
+                    Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
+                }
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Daily coffee intake")
+                        .font(.headline)
+                    Stepper("\(coffeeAmount) \(coffeeAmount > 1 ? "cups" : "cup")", value: $coffeeAmount, in: 1...20)
+                }
+                
             }
             .padding()
             .navigationTitle("BetterRest")
@@ -57,7 +63,7 @@ struct ContentView: View {
             } message: {
                 Text(alertMessage)
             }
-
+            
         }
     }
     
@@ -85,7 +91,7 @@ struct ContentView: View {
         }
         
         showingAlert = true
-
+        
         
     }
 }
